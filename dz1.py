@@ -19,4 +19,9 @@ print (f'a={a}, pi={pi}, a*pi={a*pi}')
 
 b = a/2
 bb = a//2
-print(f'{b=}, {bb=}')
+bbb = a ** 3
+print(f'{b=}, {bb=}, {bbb=}')
+
+c1 = bbb == 8
+c2 = bbb == 16
+print(f'{c1=}, {c2=}')
