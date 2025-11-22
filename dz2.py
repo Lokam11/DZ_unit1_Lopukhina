@@ -1,8 +1,6 @@
-repeat = input("Крутим дальше?")
+n = int(input("Введите целое число N:"))
+sum = 1
+for i in range(1,n):
+    sum = sum + i
+    print("Сумма чисел от 1 до", n, "равна", sum)
 
-attempt = 1
-
-while repeat.lower() != "нет":
-    print ("Поехали! Попытка", attempt)
-    attempt += 1
-    repeat = input("Крутим дальше?")
