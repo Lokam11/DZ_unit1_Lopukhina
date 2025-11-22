@@ -6,14 +6,28 @@
 
 import random
 
-N = random.randint(1, 100)
-i = input("Угадайте число:")
-i = int(i)
-if i > N:
-    print ("Ваше число больше")
-if i < N:
-    print ("Ваше число меньше")
-if i == N:
-    print ("Ура, угадал!")
+#N = random.randint(1, 100)
+#i = input("Угадайте число:")
+#i = int(i)
+#if i > N:
+#    print ("Ваше число больше")
+#if i < N:
+    #print ("Ваше число меньше")
+#if i == N:
+   # print ("Ура, угадал!")
+
+
+while True:
+    inp = input('Введите целое число:')
+
+    try:
+        inp = int(inp)
+
+        ret = inp ** 3
+        print(f'Куб введенного числа равен {ret}')
+    except:
+        print(f'Нужно целое число, а вы ввели: {inp}')
+    finally:
+        print("Попробуйте еще раз!")
 
 
