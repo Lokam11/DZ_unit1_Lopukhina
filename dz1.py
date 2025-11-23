@@ -1,4 +1,3 @@
-from logging import raiseExceptions
 
 print ("3025 год, вы стоите у двери бункера с выжившими")
 enter = input("Постучать в дверь (Да/Нет)?")
@@ -31,13 +30,26 @@ elif "Да" == enter:
         elif enter == "1" or "2":
             print ("""Мужчина предлагает угадать число
         -Я загадал число от 1 до 5, если угадаешь то мы примем тебя, если не угадаешь то придется тебе уйти""")
-        while True:
-            inp = input("Назовите число: ")
-            try:
-                inp == str(inp("4"))
-                print("Ты угадал, проходи")
-            except:
-                print("Не угадал")
+            import random
+
+
+            while True:
+                secret_number = random.randint(1, 5)
+                inp = input("Назовите число: ")
+                try:
+                    inp = int(inp)
+                    if inp == secret_number:
+                        print("Ты угадал, проходи")
+                        break
+                    else:
+                        print(f"Не угадал! Я загадал {secret_number}. Попробуй еще раз.")
+                except ValueError:
+                     print(f"По твоему '{inp}' это число?")
+
+
+
+
+
 
 
 
