@@ -42,16 +42,42 @@ def meet_leader():
     Починить генератор (1)
     Проверить вентиляцию (2)
     """)
+    success = False
     if mission == "1":
-        print("Вы успешно починили генератор, теперь в бункере есть электричество!")
-        return True
+        if player.profession == "Врач":
+            if player.reputation>= 20:
+                print("Благодаря вашей репутации больные вам доверяют")
+                print("Вы успешно осмотрели больных и назначили правильно лечение.")
+                player.change_reputation(25)
+                success = True
+            else:
+                print("Больные вам не доверяют")
+                player.change_reputation(-5)
+                success = False
+        elif player.profession == "Механик":
+            if player.reputation >= 15:
+                print("Вы быстро нашли неисправность и успешно починили генератор.")
+                player.change_reputation(30)
+                success = True
+            else:
+                print("Вам не хватило опыта для починки генератора")
+                player.change_reputation(-10)
+                success = False
     elif mission == "2":
-        print("В тоннеле вы нашли запасы еды и лекарств, отличная работа!")
-        return True
-    else:
-        print("Вы не смогли выбрать задание и вас выгнали.")
-        return False
+        if player.profession == "Врач":
+            print("Вы проверили медикаменты и нашли еще запасы")
+            player.change_reputation (15)
+            success = True
+        elif player.profession == "Механик":
+            print ("Вы проверили систему вентиляции, все работает.")
+            player.change_reputation(10)
+            success = True
+    return success
+
+
+
 print ("3025 год, вы стоите у двери бункера с выжившими")
+player = Player()
 enter = input("Постучать в дверь (Да/Нет)?")
 
 if "Нет" == enter:
@@ -80,6 +106,8 @@ elif "Да" == enter:
         if enter == "3":
             print ("Мужчина прогоняет вас прочь")
         elif enter == "1" or "2":
+            player.set_profession(enter)
+            player.show_status()
             print ("""Мужчина предлагает угадать число
         -Я загадал число от 1 до 5, если угадаешь то мы примем тебя, если не угадаешь то придется тебе уйти""")
             import random
@@ -92,15 +120,35 @@ elif "Да" == enter:
                     inp = int(inp)
                     if inp == secret_number:
                         print("Ты угадал, проходи")
-                        if meet_leader():
-                            print("Поздравляем, теперь вы можете поселиться в бункере!")
-                        else:
-                            print("К сожалению вы не справились.")
+                        player.change_reputation(10)
+                        player.show_status()
                         break
+
                     else:
                         print(f"Не угадал! Я загадал {secret_number}. Попробуй еще раз.")
+                        player.change_reputation(-3)
+                        player.show_status()
                 except ValueError:
                      print(f"По твоему '{inp}' это число?")
+                     player.change_reputation(-5)
+                     player.show_status()
+
+            if meet_leader():
+                player.show_status()
+                print("Поздравляем, теперь вы можете поселиться в бункере!")
+                if player.reputation >= 40:
+                    print("Ваша репутация позволила вма стать помощником лидера!")
+                elif player.reputation >= 25:
+                    print ("Вы хорошо поработали и стали уважаемым членом общины.")
+                else:
+                    print("Придется проделать большую работу, чтобы заслужить уважение членов общины.")
+            else:
+                player.show_status()
+                print("К сожалению вы не справились...")
+                if player.reputation <= 0:
+                   print("Вас прогоняют прочь.")
+
+
 
 
 
