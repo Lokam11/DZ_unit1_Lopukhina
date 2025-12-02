@@ -1,3 +1,30 @@
+import random
+class Player:
+    def __init__(self):
+        self.proffesion = None
+        self.reputation = 0
+    def set_profession(self,choice):
+        if choice == "1":
+            self.profession = "Врач"
+            self.reputation = 20
+            print("-Врач? Отлично, нам очень нужен врач (+20 репутации)")
+        elif choice == "2":
+            self.profession = "Механик"
+            self.reputation = 15
+            print ("-Хм, механик значит. Думаю ты можешь нам пригодиться (+15 репутации)")
+    def change_reputation(self, amount):
+        self.reputation += amount
+        if amount >0:
+            print(f"Репутация +{amount}, теперь: {self.reputation}")
+        elif amount <0:
+            print(f"Репутация {amount}, теперь: {self.reputation}")
+    def show_status(self):
+        print (f"\n[Статус игрока]")
+        print (f"Профессия: {self.profession}")
+        print (f"Репутация: {self.reputation}/100")
+
+
+
 def meet_leader():
     print("""Лидер бункера внимательно смотрит на вас и говорит:
     -Хорошо, ты прошел испытание, но у меня есть для тебя еще одно задание""")
